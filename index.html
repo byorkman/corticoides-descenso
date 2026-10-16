@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Corticoides</title>
+  <meta name="description" content="Equivalencias de corticoides y esquema de descenso para reumatología pediátrica.">
+  <meta name="theme-color" content="#a8d5c8">
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <a class="portal" href="https://reumapedia.vercel.app/"><img src="img/logo.svg" alt="" width="20" height="20">ReumaPedia</a>
+      <h1>Corticoides</h1>
+      <p class="sub">Equivalencias y plan de descenso para la familia</p>
+    </header>
+
+    <p class="aviso">Equivalencias y ritmos de descenso pendientes de validación médica. No reemplazan el criterio clínico.</p>
+
+    <section class="panel">
+      <h2>Equivalencias</h2>
+      <div class="fila">
+        <div class="campo"><label for="eqDosis">Dosis <span class="rango">mg</span></label><input type="number" id="eqDosis" inputmode="decimal" min="0" step="any" value="20"></div>
+        <div class="campo"><label for="eqDroga">Droga</label><select id="eqDroga"></select></div>
+      </div>
+      <table class="tabla" id="equivalencias"></table>
+      <p class="fuente">Potencia antiinflamatoria relativa. No tiene en cuenta la duración de acción ni el efecto mineralocorticoide.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Plan de descenso</h2>
+      <form id="form" novalidate autocomplete="off">
+        <div class="fila">
+          <div class="campo"><label for="droga">Droga</label><select id="droga"></select></div>
+          <div class="campo"><label for="dosis">Dosis actual <span class="rango">mg/día</span></label><input type="number" id="dosis" inputmode="decimal" min="0" step="any" placeholder="Ej.: 40"></div>
+        </div>
+        <div class="fila">
+          <div class="campo"><label for="inicio">Empezar a bajar el</label><input type="date" id="inicio"></div>
+          <div class="campo"><label for="diasIniciales">Días con la dosis actual <span class="rango">opcional</span></label><input type="number" id="diasIniciales" inputmode="numeric" min="1" step="1" placeholder="Según el tramo"></div>
+        </div>
+        <div class="fila">
+          <div class="campo"><label for="final">Terminar en <span class="rango">mg/día, 0 = suspender</span></label><input type="number" id="final" inputmode="decimal" min="0" step="any" value="0"></div>
+          <div class="campo"></div>
+        </div>
+        <div class="fila">
+          <div class="campo"><label for="peso">Peso <span class="rango">kg, opcional</span></label><input type="number" id="peso" inputmode="decimal" min="0" step="any"></div>
+          <div class="campo"><label for="talla">Talla <span class="rango">cm, opcional</span></label><input type="number" id="talla" inputmode="decimal" min="0" step="any"></div>
+        </div>
+        <details>
+          <summary>Ritmo de descenso</summary>
+          <table class="tabla tramos">
+            <thead><tr><th>Si la dosis es mayor a</th><th>bajar</th><th>cada</th></tr></thead>
+            <tbody id="tramos"></tbody>
+          </table>
+          <button type="button" id="restaurar">Volver a los valores sugeridos</button>
+        </details>
+      </form>
+      <div id="resumen" aria-live="polite"></div>
+      <ol id="pasos" class="pasos"></ol>
+    </section>
+
+    <section class="panel salida" id="salida" hidden>
+      <h2>Texto para la familia</h2>
+      <textarea id="texto" rows="10" readonly></textarea>
+      <div class="acciones">
+        <button type="button" id="copiar" class="principal">Copiar</button>
+        <button type="button" id="compartir">Compartir</button>
+        <button type="button" id="imprimir">Imprimir</button>
+      </div>
+      <p id="estado" class="estado" aria-live="polite"></p>
+    </section>
+
+    <footer>
+      <p>Los datos no se guardan ni se envían: todo se hace solo en este dispositivo.</p>
+      <p class="version">v1.0.0 · 16 oct 2026</p>
+    </footer>
+  </main>
+  <pre id="impresion" class="impresion"></pre>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
